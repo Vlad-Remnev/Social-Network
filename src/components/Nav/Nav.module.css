@@ -1,0 +1,21 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav {
+    grid-area: nav;
+    background-color: blue;
+    text-align: center;
+}
+
+.item {
+    padding: 10px 0;
+    color: orange;
+    font-size: 26px;
+    border-bottom: 1px solid black;
+}
+
+.active {
+    color: aqua;
+}
