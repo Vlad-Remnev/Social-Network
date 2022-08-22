@@ -1,3 +1,12 @@
+.content {
+    grid-area: content;
+    background-color: dodgerblue;
+}
+
+.content__img img{
+    width: 100%;
+}
+
 .avatar img{
     width: 150px;
     border-radius: 50%;

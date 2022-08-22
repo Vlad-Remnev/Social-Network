@@ -5,7 +5,7 @@ a {
 
 .nav {
     grid-area: nav;
-    background-color: blue;
+    background: linear-gradient(180deg, rgba(69,108,11,1) 41%, rgba(59,117,84,1) 67%);
     text-align: center;
 }
 
@@ -16,6 +16,6 @@ a {
     border-bottom: 1px solid black;
 }
 
-.active {
+a.activeLink {
     color: aqua;
 }

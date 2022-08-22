@@ -3,6 +3,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
+    justify-self: center;
 }
 
 .title {
@@ -30,4 +31,13 @@
     padding: 10px 0 0 20px;
     margin: 0;
     list-style-type: none;
+}
+
+.btn {
+    cursor: pointer;
+    transition: 1s;
+}
+
+.btn:hover {
+    background-color: rebeccapurple;
 }

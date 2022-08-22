@@ -1,8 +1,16 @@
 .header {
     grid-area: header;
-    background-color: green;
+    background: linear-gradient(315deg, rgba(66,37,59,1) 41%, rgba(59,117,84,1) 67%);
+    display: flex;
+    align-items: center;
 }
 
 .header img {
-    width: 120px;
+    width: 80px;
+    display: block;
+}
+
+.title {
+    font-size: 26px;
+    color: #800080
 }
