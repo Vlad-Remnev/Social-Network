@@ -8,45 +8,21 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
-import {IDialog} from "./components/Dialogs/DialogItem/DialogItem";
-import {IPost} from "./components/Content/Posts/Post/Post";
-import {IMessage} from "./components/Dialogs/Message/Message";
-import {updateNewPostText} from "./redux/state";
+import {IStoreAll} from "./redux/state";
 
-export interface IApp {
-    profilePage: {
-        postsData: IPost[]
-        newPostText: string
-    }
-    messagesPage: {
-        dialogsData: IDialog[]
-        messageData: IMessage[]
-        newMessageText: string
-    }
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addNewMessage: () => void
-    updateMessageText: (newText: string) => void
-}
-
-const App: FC<IApp> = ({
-                           profilePage,
-                           messagesPage,
-                           addPost,
-                           updateNewPostText,
-                           addNewMessage,
-                           updateMessageText
-                       }) => {
+const App: FC<IStoreAll> = ({store}) => {
+    const {addPost,updateNewPostText,updateMessageText,addNewMessage} = store
+    const {profilePage, messagesPage} = store.getState()
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Content state={profilePage} addPost={addPost}
-                                                                  updateNewPostText={updateNewPostText}/>}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={messagesPage} addNewMessage={addNewMessage}
-                                                                  updateMessageText={updateMessageText}/>}/>
+                    <Route path='/profile' render={() => <Content state={profilePage} addPost={addPost.bind(store)}
+                                                                  updateNewPostText={updateNewPostText.bind(store)}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={messagesPage} addNewMessage={addNewMessage.bind(store)}
+                                                                  updateMessageText={updateMessageText.bind(store)}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

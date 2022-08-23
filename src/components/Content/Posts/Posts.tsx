@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useRef} from 'react';
+import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import s from './Posts.module.css'
 import {IPost, Post} from "./Post/Post";
 
@@ -13,16 +13,18 @@ export interface IPosts {
 
 export const Posts: FC<IPosts> = ({state, addPost, updateNewPostText}) => {
     let postsElements = state.postsData.map(post => <Post key={post.id++} id={post.id} message={post.message} likes={post.likes}/>)
-
-    let newPost = useRef<HTMLTextAreaElement>(null)
+    // const [value, setValue] = useState('')
+    // let newPost = useRef<HTMLTextAreaElement>(null)
 
     const addPostHandler = () => {
         addPost()
     }
 
+    console.log('post', state)
+
     const onPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        let newPost = event.currentTarget.value
-        updateNewPostText(newPost)
+        console.log(event.currentTarget.value)
+        updateNewPostText(event.currentTarget.value)
     }
 
     return (
@@ -33,7 +35,7 @@ export const Posts: FC<IPosts> = ({state, addPost, updateNewPostText}) => {
                           onChange={onPostChange}
                           value={state.newPostText}
                           placeholder={'type some text...'}
-                          ref={newPost}
+                          // ref={newPost}
                 />
                 <button className={s.btn} onClick={addPostHandler}>Add Post</button>
             </div>
