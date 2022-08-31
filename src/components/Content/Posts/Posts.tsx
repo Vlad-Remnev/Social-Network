@@ -1,30 +1,30 @@
 import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import s from './Posts.module.css'
-import {IPost, Post} from "./Post/Post";
+import {Post} from "./Post/Post";
+import {AllActionTypes, IProfileAll} from "../../../redux/state";
+import {addPostActionCreator, updatePostActionCreator} from "../../../redux/profile_reducer";
 
 export interface IPosts {
-    state: {
-        postsData: IPost[]
-        newPostText: string
-    }
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    state: IProfileAll
+    dispatch: (action: AllActionTypes) => void
 }
 
-export const Posts: FC<IPosts> = ({state, addPost, updateNewPostText}) => {
+export const Posts: FC<IPosts> = ({state, dispatch}) => {
     let postsElements = state.postsData.map(post => <Post key={post.id++} id={post.id} message={post.message} likes={post.likes}/>)
     // const [value, setValue] = useState('')
     // let newPost = useRef<HTMLTextAreaElement>(null)
 
     const addPostHandler = () => {
-        addPost()
+        // addPost()
+        dispatch(addPostActionCreator())
     }
 
     console.log('post', state)
 
     const onPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         console.log(event.currentTarget.value)
-        updateNewPostText(event.currentTarget.value)
+        // updateNewPostText(event.currentTarget.value)
+        dispatch(updatePostActionCreator(event.currentTarget.value))
     }
 
     return (

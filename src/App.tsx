@@ -11,7 +11,7 @@ import {Music} from "./components/Music/Music";
 import {IStoreAll} from "./redux/state";
 
 const App: FC<IStoreAll> = ({store}) => {
-    const {addPost,updateNewPostText,updateMessageText,addNewMessage} = store
+    const {dispatch} = store
     const {profilePage, messagesPage} = store.getState()
     return (
         <BrowserRouter>
@@ -19,10 +19,8 @@ const App: FC<IStoreAll> = ({store}) => {
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Content state={profilePage} addPost={addPost.bind(store)}
-                                                                  updateNewPostText={updateNewPostText.bind(store)}/>}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={messagesPage} addNewMessage={addNewMessage.bind(store)}
-                                                                  updateMessageText={updateMessageText.bind(store)}/>}/>
+                    <Route path='/profile' render={() => <Content state={profilePage} dispatch={dispatch.bind(store)}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={messagesPage}  dispatch={dispatch.bind(store)}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

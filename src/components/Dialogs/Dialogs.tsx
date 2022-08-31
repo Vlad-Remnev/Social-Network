@@ -1,34 +1,32 @@
 import React, {ChangeEvent, FC, useRef} from 'react';
 import s from './Dialogs.module.css'
-import {DialogItem, IDialog} from "./DialogItem/DialogItem";
-import {IMessage, Message} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
+import {AllActionTypes, IDialogsAll} from "../../redux/state";
+import {addMessageActionCreator, updateMessageActionCreator} from "../../redux/dialogs_reducer";
 
 export interface IDialogs {
-    state: {
-        dialogsData: IDialog[]
-        messageData: IMessage[]
-        newMessageText: string
-    }
-    addNewMessage: () => void
-    updateMessageText: (newText: string) => void
+    state: IDialogsAll
+    dispatch: (action: AllActionTypes) => void
 }
 
-
-export const Dialogs: FC<IDialogs> = ({state, updateMessageText, addNewMessage}) => {
+export const Dialogs: FC<IDialogs> = ({state, dispatch}) => {
 
     let dialogs = state.dialogsData.map(dialog => <DialogItem key={dialog.id++} id={dialog.id} name={dialog.name}
                                                               avatar={dialog.avatar}/>)
     let messages = state.messageData.map(message => <Message key={message.id++} id={message.id} info={message.info}/>)
 
-    let newMessage = useRef<HTMLTextAreaElement>(null)
+    // let newMessage = useRef<HTMLTextAreaElement>(null)
 
     const addNewMessageHandler = () => {
-        addNewMessage()
+        // addNewMessage()
+        dispatch(addMessageActionCreator())
     }
 
     const onMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessage = event.currentTarget.value
-        updateMessageText(newMessage)
+        // updateMessageText(newMessage)
+        dispatch(updateMessageActionCreator(event.currentTarget.value))
     }
 
     return (
@@ -39,7 +37,7 @@ export const Dialogs: FC<IDialogs> = ({state, updateMessageText, addNewMessage})
             <div className={s.dialogsMessages}>
                 {messages}
                 <div className={s.addMessage}>
-                    <textarea className={s.textArea} ref={newMessage} rows={5} onChange={onMessageChange} value={state.newMessageText}></textarea>
+                    <textarea className={s.textArea} rows={5} onChange={onMessageChange} value={state.newMessageText} placeholder={'type some text...'}></textarea>
                     <button className={s.addButton} onClick={addNewMessageHandler}>Add message</button>
                 </div>
             </div>

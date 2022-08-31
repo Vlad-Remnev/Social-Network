@@ -4,11 +4,11 @@ import {User} from "./User/User";
 
 type ContentTypeProps = IPosts
 
-export const Content:FC<ContentTypeProps> = ({state, addPost, updateNewPostText}) => {
+export const Content:FC<ContentTypeProps> = ({state, dispatch}) => {
     return (
         <div>
             <User />
-            <Posts state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+            <Posts state={state} dispatch={dispatch}/>
         </div>
     );
 };
