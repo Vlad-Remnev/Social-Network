@@ -1,9 +1,25 @@
-import {AllActionTypes, IDialogsAll} from "./state";
+import {AllActionTypes, IDialogsAll} from "./store";
 
 export const ADD_MESSAGE = 'ADD-MESSAGE'
 export const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 
-const dialogsReducer = (state: IDialogsAll, action: AllActionTypes) => {
+let initialState = {
+    dialogsData: [
+        {id: 1, name: 'Svetlana', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+        {id: 2, name: 'Igor', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+        {id: 3, name: 'Vlad', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+        {id: 4, name: 'Alexey', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+        {id: 5, name: 'Stas', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+    ],
+    messageData: [
+        {id: 1, info: 'Hi'},
+        {id: 2, info: 'How is your training in programming?'},
+        {id: 3, info: 'Wish you luck)'},
+    ],
+    newMessageText: ''
+}
+
+const dialogsReducer = (state: IDialogsAll = initialState, action: AllActionTypes) => {
     // if (action.type === ADD_MESSAGE) {
     //     let message = {id: 4, info: state.newMessageText}
     //     state.messageData.push(message)

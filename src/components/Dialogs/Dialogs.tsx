@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useRef} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {AllActionTypes, IDialogsAll} from "../../redux/state";
+import {AllActionTypes, IDialogsAll} from "../../redux/store";
 import {addMessageActionCreator, updateMessageActionCreator} from "../../redux/dialogs_reducer";
 
 export interface IDialogs {

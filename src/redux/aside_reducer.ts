@@ -1,6 +1,8 @@
-import {AllActionTypes} from "./state";
+import {AllActionTypes} from "./store";
 
-const asideReducer = (state: any, action: AllActionTypes) => {
+let initialState = {}
+
+const asideReducer = (state: any = initialState, action: AllActionTypes) => {
     return state
 }
 

@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import s from './Posts.module.css'
 import {Post} from "./Post/Post";
-import {AllActionTypes, IProfileAll} from "../../../redux/state";
+import {AllActionTypes, IProfileAll} from "../../../redux/store";
 import {addPostActionCreator, updatePostActionCreator} from "../../../redux/profile_reducer";
 
 export interface IPosts {
