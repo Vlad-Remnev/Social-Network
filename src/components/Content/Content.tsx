@@ -1,14 +1,16 @@
 import React, {FC} from 'react';
-import {IPosts, Posts} from "./Posts/Posts";
-import {User} from "./User/User";
+import {MainUser} from "./UserMain/UserMain";
+import {PostsContainer} from "./Posts/PostsContainer";
 
-type ContentTypeProps = IPosts
+// type PropsType = {
+//     store :Store<RootState>
+// }
 
-export const Content:FC<ContentTypeProps> = ({state, dispatch}) => {
+export const Content = () => {
     return (
         <div>
-            <User />
-            <Posts state={state} dispatch={dispatch}/>
+            <MainUser />
+            <PostsContainer />
         </div>
     );
 };

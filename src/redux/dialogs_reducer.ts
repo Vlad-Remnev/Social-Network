@@ -1,4 +1,4 @@
-import {AllActionTypes, IDialogsAll} from "./store";
+import {AllActionTypes, IDialogsAll} from "./redux-store";
 
 export const ADD_MESSAGE = 'ADD-MESSAGE'
 export const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
@@ -31,13 +31,13 @@ const dialogsReducer = (state: IDialogsAll = initialState, action: AllActionType
     switch (action.type) {
         case "ADD-MESSAGE": {
             let message = {id: 4, info: state.newMessageText}
-            state.messageData.push(message)
-            state.newMessageText = ''
-            return state
+            // state.messageData.push(message)
+            // state.newMessageText = ''
+            return {...state, messageData: [message, ...state.messageData] , newMessageText: ''}
         }
         case "UPDATE-MESSAGE-TEXT": {
-            state.newMessageText = action.newText
-            return state
+            // state.newMessageText = action.newText
+            return {...state, newMessageText: action.newText}
         }
         default: return state
     }

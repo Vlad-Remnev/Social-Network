@@ -1,7 +1,7 @@
 import React from 'react';
-import s from "./User.module.css";
+import s from "./UserMain.module.css";
 
-export const User = () => {
+export const MainUser = () => {
     return (
         <>
             <div className={s.userInfo}>

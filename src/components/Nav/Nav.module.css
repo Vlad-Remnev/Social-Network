@@ -7,6 +7,7 @@ a {
     grid-area: nav;
     background: linear-gradient(180deg, rgba(69,108,11,1) 41%, rgba(59,117,84,1) 67%);
     text-align: center;
+    max-height: 336px;
 }
 
 .item {

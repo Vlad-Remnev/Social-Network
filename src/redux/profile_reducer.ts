@@ -1,4 +1,5 @@
-import {AllActionTypes, IProfileAll} from "./store";
+import {AllActionTypes, IProfileAll} from "./redux-store";
+
 
 export const ADD_POST = 'ADD-POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -15,13 +16,10 @@ const profileReducer = (state: IProfileAll = initialState, action: AllActionType
     switch (action.type) {
         case "ADD-POST": {
             let post = {id: 3, message: state.newPostText, likes: 0}
-            state.postsData.push(post)
-            state.newPostText = ''
-            return state
+            return {...state, postsData: [post, ...state.postsData], newPostText: ''}
         }
         case "UPDATE-NEW-POST-TEXT": {
-            state.newPostText = action.newText
-            return state
+            return {...state, newPostText: action.newText}
         }
         default: return state
     }

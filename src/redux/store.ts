@@ -5,70 +5,53 @@ import profileReducer, {AddPostActionType, UpdatePostActionType} from "./profile
 import dialogsReducer, {AddNewPostActionType, UpdateMessageActionType} from "./dialogs_reducer";
 import asideReducer from "./aside_reducer";
 
-export type AllActionTypes = AddNewPostActionType |
-                             UpdateMessageActionType |
-                             AddPostActionType |
-                             UpdatePostActionType
+// export type AllActionTypes = AddNewPostActionType |
+//                              UpdateMessageActionType |
+//                              AddPostActionType |
+//                              UpdatePostActionType
 
-export interface IProfileAll {
-    postsData: IPost[]
-    newPostText: string
-}
+// export interface IStoreAll {
+//     store: IStore
+// }
 
-export interface IDialogsAll {
-    dialogsData: IDialog[]
-    messageData: IMessage[]
-    newMessageText: string
-}
-
-export interface IState {
-    profilePage: IProfileAll,
-    messagesPage: IDialogsAll
-    aside: {}
-}
-
-export interface IStoreAll {
-    store: IStore
-}
-
-export interface IStore {
-    _state: IState
+// export interface IStore {
+//     _state: IState
     // addPost: () => void
     // updateNewPostText: (newText: string) => void
     // addNewMessage: () => void
     // updateMessageText: (newText: string) => void
-    dispatch: (action: AllActionTypes) => void
-    subscribe: (observer: (state: IStore) => void) => void
-    renderEntireTree: (state: IStore) => void
-    getState: () => IState
-}
+//     dispatch: (action: AllActionTypes) => void
+//     subscribe: (observer: (state: IStore) => void) => void
+//     renderEntireTree: (state: IStore) => void
+//     getState: () => IState
+// }
 
-export let store: IStore = {
-    _state: {
-        profilePage: {
-            postsData: [
-                {id: 1, message: 'Привет, как твои дела?', likes: 34},
-                {id: 2, message: 'Сегодня был на выставке, впечатлительно!)))', likes: 10}
-            ],
-            newPostText: ''
-        },
-        messagesPage: {
-            dialogsData: [
-                {id: 1, name: 'Svetlana', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-                {id: 2, name: 'Igor', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-                {id: 3, name: 'Vlad', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-                {id: 4, name: 'Alexey', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-                {id: 5, name: 'Stas', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-            ],
-            messageData: [
-                {id: 1, info: 'Hi'},
-                {id: 2, info: 'How is your training in programming?'},
-                {id: 3, info: 'Wish you luck)'},
-            ],
-            newMessageText: ''
-        },
-        aside: {}
-    },
+// export let store: IStore = {
+//     _state: {
+//         profilePage: {
+//             postsData: [
+//                 {id: 1, message: 'Привет, как твои дела?', likes: 34},
+//                 {id: 2, message: 'Сегодня был на выставке, впечатлительно!)))', likes: 10}
+//             ],
+//             newPostText: ''
+//         },
+//         messagesPage: {
+//             dialogsData: [
+//                 {id: 1, name: 'Svetlana', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+//                 {id: 2, name: 'Igor', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+//                 {id: 3, name: 'Vlad', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+//                 {id: 4, name: 'Alexey', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+//                 {id: 5, name: 'Stas', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+//             ],
+//             messageData: [
+//                 {id: 1, info: 'Hi'},
+//                 {id: 2, info: 'How is your training in programming?'},
+//                 {id: 3, info: 'Wish you luck)'},
+//             ],
+//             newMessageText: ''
+//         },
+//         aside: {}
+//     },
     // addPost() {
     //     let post = {id: 3, message: this._state.profilePage.newPostText, likes: 0}
     //     this._state.profilePage.postsData.push(post)
@@ -89,11 +72,11 @@ export let store: IStore = {
     //     this._state.messagesPage.newMessageText = newText
     //     this.renderEntireTree(this)
     // },
-    dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
-        this._state.aside = asideReducer(this._state.aside, action)
-        this.renderEntireTree(this)
+    // dispatch(action) {
+    //     this._state.profilePage = profileReducer(this._state.profilePage, action)
+    //     this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+    //     this._state.aside = asideReducer(this._state.aside, action)
+    //     this.renderEntireTree(this)
         // if(action.type === 'ADD-POST') {
         //     let post = {id: 3, message: this._state.profilePage.newPostText, likes: 0}
         //     this._state.profilePage.postsData.push(post)
@@ -111,17 +94,17 @@ export let store: IStore = {
         //     this._state.messagesPage.newMessageText = action.newText
         //     this.renderEntireTree(this)
         // }
-    },
-    subscribe(observer) {
-        this.renderEntireTree = observer
-    },
-    renderEntireTree(state) {
-        console.log('State change')
-    },
-    getState() {
-        return this._state
-    }
-}
+//     },
+//     subscribe(observer) {
+//         this.renderEntireTree = observer
+//     },
+//     renderEntireTree(state) {
+//         console.log('State change')
+//     },
+//     getState() {
+//         return this._state
+//     }
+// }
 
 // let renderEntireTree = (state: IState) => {
 //     console.log('State change')
@@ -179,3 +162,5 @@ export let store: IStore = {
 // export const subscribe = (observer: (state: IState) => void) => {
 //     renderEntireTree = observer
 // }
+
+export default () => {}

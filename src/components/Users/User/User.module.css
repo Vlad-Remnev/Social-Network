@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    padding: 0 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    margin: 10px 0;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    border: 5px solid gray;
+    border-radius: 15px;
+    width: 500px;
+}
+
+.name {
+    color: papayawhip;
+}
+
+.status {
+    margin-top: 20px;
+    color: gray;
+    font-size: 12px;
+}
+
+.info {
+
+}
+
+.avatar img {
+    max-width: 50px;
+    border-radius: 50%;
+}
+
+.avatarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.followStatus {
+    padding: 7px;
+    text-align: center;
+    background-color: purple;
+    color: white;
+    border-radius: 15px;
+    width: 70px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.unFollowStatus {
+    background-color: lightseagreen;
+    color: #ee4b4b;
+}
