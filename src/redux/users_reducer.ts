@@ -5,10 +5,10 @@ export
 
 const initialState: IUsersAll = {
     users: [
-        {id: 1, followed: true, fullName: 'Vladislav', status: 'Everything is fine', location: {city: 'Gymri', country: 'Armenia'}},
-        {id: 2, followed: true, fullName: 'Masha', status: 'Working is fine', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 3, followed: true, fullName: 'Svetlana', status: 'Oh my, bought a new Bag!!!!!', location: {city: 'Volzhsky', country: 'Russia'}},
-        {id: 4, followed: false, fullName: 'Stas', status: 'Vse po kaify(2007)', location: {city: 'Tbilisi', country: 'Georgia'}},
+        // {id: 1, followed: true, fullName: 'Vladislav', status: 'Everything is fine', location: {city: 'Gymri', country: 'Armenia'}},
+        // {id: 2, followed: true, fullName: 'Masha', status: 'Working is fine', location: {city: 'Moscow', country: 'Russia'}},
+        // {id: 3, followed: true, fullName: 'Svetlana', status: 'Oh my, bought a new Bag!!!!!', location: {city: 'Volzhsky', country: 'Russia'}},
+        // {id: 4, followed: false, fullName: 'Stas', status: 'Vse po kaify(2007)', location: {city: 'Tbilisi', country: 'Georgia'}},
     ]
 }
 

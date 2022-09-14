@@ -4,6 +4,7 @@ import {IUsersAll, RootState} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {followAc, setUsers} from "../../redux/users_reducer";
 import {IUser} from "./User/User";
+import UsersClass from "./UsersClass";
 
 interface MapStateToProps {
     usersPage: IUsersAll
@@ -33,4 +34,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)
