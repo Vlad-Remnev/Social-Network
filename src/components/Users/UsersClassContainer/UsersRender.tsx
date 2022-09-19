@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import s from "../../../old/User/User.module.css";
 import {NavLink, Route} from "react-router-dom";
+import axios from "axios";
 
 export interface IUser {
     name: string
@@ -20,7 +21,8 @@ interface IUsersRender {
     currentPage: number
     onPageChange: (pageNumber: number) => void
     users: IUser[]
-    onFollow: (userId: number, follow: boolean) => void
+    onFollow: (userId: number) => void
+    unFollow: (userId: number) => void
 }
 
 export const UsersRender: FC<IUsersRender> = ({
@@ -29,7 +31,8 @@ export const UsersRender: FC<IUsersRender> = ({
                                                   pageSize,
                                                   currentPage,
                                                   onPageChange,
-                                                  onFollow
+                                                  onFollow,
+                                                  unFollow
                                               }) => {
     let pagesCount = Math.ceil(totalUserCount / pageSize)
     let pages = []
@@ -44,7 +47,31 @@ export const UsersRender: FC<IUsersRender> = ({
                                      onClick={() => onPageChange(+page)}>{page}</span>)}
             {users.map(item => {
                 const onFollowUser = () => {
-                    onFollow(item.id, !item.followed)
+                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`, {}, {
+                        withCredentials: true,
+                        headers: {
+                            'API-KEY': 'cbcee176-7eb2-4a97-9122-df66bf35b024',
+                        }
+                    })
+                        .then(response => {
+                            if (response.data.resultCode === 0) {
+                                onFollow(item.id)
+                            }
+                        })
+                }
+
+                const unFollowUser = () => {
+                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`, {
+                        withCredentials: true,
+                        headers: {
+                            'API-KEY': 'cbcee176-7eb2-4a97-9122-df66bf35b024',
+                        }
+                    })
+                        .then(response => {
+                            if (response.data.resultCode === 0) {
+                                unFollow(item.id)
+                            }
+                        })
                 }
 
                 return <div className={s.container} key={item.id}>
@@ -56,12 +83,18 @@ export const UsersRender: FC<IUsersRender> = ({
                                     alt="PostManAvatar"/>
                             </NavLink>
                         </div>
-                        <button
-                            className={item.followed ? s.followStatus : s.followStatus + ' ' + s.unFollowStatus}
-                            onClick={onFollowUser}
-                        >
-                            {item.followed ? 'Unfollow' : 'Follow'}
-                        </button>
+                        {item.followed
+                            ? <button
+                                className={s.followStatus + ' ' + s.unFollowStatus}
+                                onClick={unFollowUser}>
+                                Follow
+                            </button>
+                            : <button
+                                className={s.followStatus}
+                                onClick={onFollowUser}>
+                                Unfollow
+                            </button>}
+
                     </div>
                     <div className={s.item}>
                         <div className={s.info}>

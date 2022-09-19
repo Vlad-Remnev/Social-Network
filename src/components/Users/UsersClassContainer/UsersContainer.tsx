@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {RootState} from "../../../redux/redux-store";
-import {onFollow, changePage, setTotalCount, setUsers, setFetching} from "../../../redux/users_reducer";
+import {onFollow, unFollow, changePage, setTotalCount, setUsers, setFetching} from "../../../redux/users_reducer";
 import {IUser} from "../../../old/User/User";
 import React from "react";
 import axios from "axios";
@@ -16,7 +16,8 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
-    onFollow: (userId: number, follow: boolean) => void
+    onFollow: (userId: number) => void
+    unFollow: (userId: number) => void
     setUsers: (users: IUser[]) => void
     changePage: (currentPage: number) => void
     setTotalCount: (totalCount: number) => void
@@ -59,7 +60,8 @@ class UsersClass extends React.Component<UsersPropsType> {
     //продолжить на 55
     componentDidMount() {
         this.props.setFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true})
             .then(response => {
                 this.props.setFetching(false)
                 this.props.setUsers(response.data.items)
@@ -70,7 +72,8 @@ class UsersClass extends React.Component<UsersPropsType> {
     onPageChange = (pageNumber: number) => {
         this.props.changePage(pageNumber)
         this.props.setFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true})
             .then(response => {
                 this.props.setFetching(false)
                 this.props.setUsers(response.data.items)
@@ -89,6 +92,7 @@ class UsersClass extends React.Component<UsersPropsType> {
                              pageSize={this.props.pageSize}
                              onPageChange={this.onPageChange}
                              onFollow={this.props.onFollow}
+                             unFollow={this.props.unFollow}
                 />
             </>
         );
@@ -102,5 +106,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers,
     changePage,
     setTotalCount,
-    setFetching
+    setFetching,
+    unFollow
 })(UsersClass)

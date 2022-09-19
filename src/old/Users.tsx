@@ -4,7 +4,7 @@ import {User} from "./User/User";
 import s from "./User/User.module.css";
 import axios from "axios";
 
-export const Users: FC<UsersPropsType> = ({users, totalUserCount, pageSize, setUsers, onFollow}) => {
+export const Users: FC<UsersPropsType> = ({users, totalUserCount, pageSize, setUsers, onFollow, unFollow}) => {
 
     let getUsers = () => {
         if (users.length === 0) {
@@ -24,7 +24,11 @@ export const Users: FC<UsersPropsType> = ({users, totalUserCount, pageSize, setU
             {users.map(item => {
 
                 const onFollowUser = () => {
-                    onFollow(item.id, !item.followed)
+                    onFollow(item.id)
+                }
+
+                const unFollowUser = () => {
+                    unFollow(item.id)
                 }
 
                 return <>
@@ -33,12 +37,17 @@ export const Users: FC<UsersPropsType> = ({users, totalUserCount, pageSize, setU
                             <div className={s.avatar}>
                                 <img src={item.photos.small ? item.photos.small : "https://pbs.twimg.com/media/DqsHCtWXQAYygYP.jpg"} alt="PostManAvatar"/>
                             </div>
-                            <button
-                                className={item.followed ? s.followStatus : s.followStatus + ' ' + s.unFollowStatus}
-                                onClick={onFollowUser}
-                            >
-                                {item.followed ? 'Unfollow' : 'Follow'}
-                            </button>
+                            {item.followed
+                                ? <button
+                                    className={s.followStatus}
+                                    onClick={onFollowUser}>
+                                    Unfollow
+                                </button>
+                                : <button
+                                    className={s.followStatus + ' ' + s.unFollowStatus}
+                                    onClick={unFollowUser}>
+                                    Follow
+                                </button>}
                         </div>
                         <User
                             key={item.id}

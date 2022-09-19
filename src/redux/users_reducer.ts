@@ -24,7 +24,9 @@ const initialState: IUsersAll = {
 const usersReducer = (state: IUsersAll = initialState, action: AllUserType): IUsersAll => {
     switch (action.type) {
         case "FOLLOW":
-            return {...state, users: state.users.map(user => user.id === action.payload.userId ? {...user, followed: action.payload.follow} : user)}
+            return {...state, users: state.users.map(user => user.id === action.payload.userId ? {...user, followed: true} : user)}
+        case "UNFOLLOW":
+            return {...state, users: state.users.map(user => user.id === action.payload.userId ? {...user, followed: false} : user)}
         case "SET-USERS":
             return {...state, users: [...action.payload.users]}
         case "SET-PAGE":
@@ -37,13 +39,21 @@ const usersReducer = (state: IUsersAll = initialState, action: AllUserType): IUs
             return state
     }
 }
-export type AllUserType = FollowActionType | SetUsersActionType | SetPageActionType | SetTotalCountActionType | IsFetchingActionType
+export type AllUserType = FollowActionType | UnFollowActionType | SetUsersActionType | SetPageActionType | SetTotalCountActionType | IsFetchingActionType
 
 export type FollowActionType = ReturnType<typeof onFollow>
-export const onFollow = (userId: number, follow: boolean) => {
+export const onFollow = (userId: number) => {
     return {
         type: 'FOLLOW',
-        payload: {userId, follow}
+        payload: {userId}
+    } as const
+}
+
+export type UnFollowActionType = ReturnType<typeof unFollow>
+export const unFollow = (userId: number) => {
+    return {
+        type: 'UNFOLLOW',
+        payload: {userId}
     } as const
 }
 
