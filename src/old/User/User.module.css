@@ -2,7 +2,7 @@
     display: flex;
     padding: 0 30px;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 .item {
@@ -57,4 +57,14 @@
 .unFollowStatus {
     background-color: lightseagreen;
     color: #ee4b4b;
+}
+
+.active {
+    color: red;
+}
+
+.pagination {
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 18px;
 }

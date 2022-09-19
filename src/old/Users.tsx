@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import {UsersPropsType} from "./UsersContainer";
+import {UsersPropsType} from "../components/Users/UsersClassContainer/UsersContainer";
 import {User} from "./User/User";
 import s from "./User/User.module.css";
 import axios from "axios";
 
-export const Users: FC<UsersPropsType> = ({usersPage, setUsers, onFollow}) => {
+export const Users: FC<UsersPropsType> = ({users, totalUserCount, pageSize, setUsers, onFollow}) => {
 
     let getUsers = () => {
-        if (usersPage.users.length === 0) {
+        if (users.length === 0) {
             axios.get("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => setUsers(response.data.items))
         }
@@ -21,7 +21,7 @@ export const Users: FC<UsersPropsType> = ({usersPage, setUsers, onFollow}) => {
         <div>
             <h2 style={style}>Users</h2>
             <button onClick={getUsers}>Get all users</button>
-            {usersPage.users.map(item => {
+            {users.map(item => {
 
                 const onFollowUser = () => {
                     onFollow(item.id, !item.followed)

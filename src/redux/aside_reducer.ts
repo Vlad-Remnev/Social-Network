@@ -1,8 +1,6 @@
-import {AllActionTypes} from "./redux-store";
-
 let initialState = {}
 
-const asideReducer = (state: any = initialState, action: AllActionTypes) => {
+const asideReducer = (state: any = initialState, action: any) => {
     return state
 }
 

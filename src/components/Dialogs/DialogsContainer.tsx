@@ -1,8 +1,7 @@
 import React from 'react';
-import {Dispatch} from "redux";
-import {IDialogsAll, RootState} from "../../redux/redux-store";
+import {RootState} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
-import {addMessageActionCreator, updateMessageActionCreator} from "../../redux/dialogs_reducer";
+import {IDialogsAll, onAddMessage, onMessageChange} from "../../redux/dialogs_reducer";
 import {connect} from "react-redux";
 
 
@@ -48,15 +47,18 @@ let mapStateToProps = (state: RootState): MapStateToProps => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        onAddMessage: () => {
-            dispatch(addMessageActionCreator())
-        },
-        onMessageChange: (text) => {
-            dispatch(updateMessageActionCreator(text))
-        }
-    }
-}
+// let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+//     return {
+//         onAddMessage: () => {
+//             dispatch(addMessageActionCreator())
+//         },
+//         onMessageChange: (text) => {
+//             dispatch(updateMessageActionCreator(text))
+//         }
+//     }
+// }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export const DialogsContainer = connect(mapStateToProps, {
+    onAddMessage,
+    onMessageChange
+})(Dialogs);

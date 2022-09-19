@@ -2,12 +2,26 @@
     grid-area: header;
     background: linear-gradient(315deg, rgba(66,37,59,1) 41%, rgba(59,117,84,1) 67%);
     display: flex;
-    align-items: center;
+    justify-content: space-between;
 }
 
 .header img {
     width: 80px;
     display: block;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 26px;
+    color: rgba(59,117,84,1)
 }
 
 .title {

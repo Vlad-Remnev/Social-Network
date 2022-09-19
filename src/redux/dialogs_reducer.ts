@@ -1,7 +1,14 @@
-import {AllActionTypes, IDialogsAll} from "./redux-store";
+import {IDialog} from "../components/Dialogs/DialogItem/DialogItem";
+import {IMessage} from "../components/Dialogs/Message/Message";
 
 export const ADD_MESSAGE = 'ADD-MESSAGE'
 export const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
+
+export interface IDialogsAll {
+    dialogsData: IDialog[]
+    messageData: IMessage[]
+    newMessageText: string
+}
 
 let initialState = {
     dialogsData: [
@@ -19,7 +26,7 @@ let initialState = {
     newMessageText: ''
 }
 
-const dialogsReducer = (state: IDialogsAll = initialState, action: AllActionTypes) => {
+const dialogsReducer = (state: IDialogsAll = initialState, action: AllDialogsTypes) => {
     // if (action.type === ADD_MESSAGE) {
     //     let message = {id: 4, info: state.newMessageText}
     //     state.messageData.push(message)
@@ -43,16 +50,18 @@ const dialogsReducer = (state: IDialogsAll = initialState, action: AllActionType
     }
 }
 
-export type AddNewPostActionType = ReturnType<typeof addMessageActionCreator>
-export type UpdateMessageActionType = ReturnType<typeof updateMessageActionCreator>
+export type AllDialogsTypes = AddNewPostActionType | UpdateMessageActionType
+
+export type AddNewPostActionType = ReturnType<typeof onAddMessage>
+export type UpdateMessageActionType = ReturnType<typeof onMessageChange>
 
 
-export const addMessageActionCreator = () => {
+export const onAddMessage = () => {
     return {
         type: ADD_MESSAGE
     }as const
 }
-export const updateMessageActionCreator = (newText: string) => {
+export const onMessageChange = (newText: string) => {
     return {
         type: UPDATE_MESSAGE_TEXT,
         newText: newText

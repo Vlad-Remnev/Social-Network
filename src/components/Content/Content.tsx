@@ -1,15 +1,16 @@
 import React, {FC} from 'react';
 import {MainUser} from "./UserMain/UserMain";
 import {PostsContainer} from "./Posts/PostsContainer";
+import {IMainUser} from "../../redux/profile_reducer";
 
-// type PropsType = {
-//     store :Store<RootState>
-// }
+export interface IContent {
+    profile: IMainUser | null
+}
 
-export const Content = () => {
+export const Content:FC<IContent> = ({profile}) => {
     return (
         <div>
-            <MainUser />
+            <MainUser profile={profile}/>
             <PostsContainer />
         </div>
     );
