@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {userMainAPI} from "../api/api";
+
 export interface IAuth {
     userId: number | null
     email: string | null
@@ -33,6 +36,18 @@ export const setAuthUserData = (userId: number, email: string, login: string) =>
             }
         }
     } as const
+}
+
+export const authMainUser = () => {
+    return (dispatch: Dispatch) => {
+        userMainAPI.auth()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
 }
 
 export default authReducer
