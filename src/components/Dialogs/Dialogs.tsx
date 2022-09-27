@@ -28,16 +28,16 @@ export const Dialogs: FC<DialogsPropsType> = ({messagesPage, onMessageChange, on
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsUsers}>
-                {dialogs}
-            </div>
-            <div className={s.dialogsMessages}>
-                {messages}
-                <div className={s.addMessage}>
-                    <textarea className={s.textArea} rows={5} onChange={messageChange} value={messagesPage.newMessageText} placeholder={'type some text...'}></textarea>
-                    <button className={s.addButton} onClick={addNewMessageHandler}>Add message</button>
+                <div className={s.dialogsUsers}>
+                    {dialogs}
                 </div>
-            </div>
+                <div className={s.dialogsMessages}>
+                    {messages}
+                    <div className={s.addMessage}>
+                        <textarea className={s.textArea} rows={5} onChange={messageChange} value={messagesPage.newMessageText} placeholder={'type some text...'}></textarea>
+                        <button className={s.addButton} onClick={addNewMessageHandler}>Add message</button>
+                    </div>
+                </div>
         </div>
     );
 };

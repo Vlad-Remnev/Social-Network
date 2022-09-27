@@ -1,10 +1,11 @@
 import React from 'react';
 import {Content} from "./Content";
-import axios from "axios";
 import {connect} from "react-redux";
-import {IMainUser, setUserProfile} from "../../redux/profile_reducer";
+import {changeUserTemplate, IMainUser} from "../../redux/profile_reducer";
 import {RootState} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ContentContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -12,10 +13,7 @@ class ContentContainer extends React.Component<PropsType> {
         if(!userId) {
             userId = '25452'
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })
+        this.props.changeUserTemplate(userId)
     }
 
     render() {
@@ -24,6 +22,11 @@ class ContentContainer extends React.Component<PropsType> {
         )
     }
 }
+
+// let AuthRedirectComponent = (props: PropsType) => {
+//     if (!props.isAuth) return <Redirect to='/login'/>
+//     return <ContentContainer {...props}/>
+// }
 
 type PathParamType = {
     userId: string
@@ -38,13 +41,19 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
-    setUserProfile: (profile: IMainUser) => void
+    changeUserTemplate: (userId: string) => void
 }
 
 let mapStateToProps = (state: RootState): MapStateToProps => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
 })
 
-let WithURLDataContainer = withRouter(ContentContainer)
+// let WithURLDataContainer = withRouter(ContentContainer)
+//
+// export default withAuthRedirect(connect(mapStateToProps, {changeUserTemplate})(WithURLDataContainer))
 
-export default connect(mapStateToProps, {setUserProfile})(WithURLDataContainer)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {changeUserTemplate}),
+    withRouter,
+    withAuthRedirect
+)(ContentContainer)

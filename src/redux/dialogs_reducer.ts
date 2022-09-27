@@ -12,11 +12,11 @@ export interface IDialogsAll {
 
 let initialState = {
     dialogsData: [
-        {id: 1, name: 'Svetlana', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-        {id: 2, name: 'Igor', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-        {id: 3, name: 'Vlad', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-        {id: 4, name: 'Alexey', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
-        {id: 5, name: 'Stas', avatar: 'https://cspromogame.ru//storage/upload_images/avatars/833.jpg'},
+        {id: 1, name: 'Svetlana', avatar: 'https://pbs.twimg.com/media/DqsHCtWXQAYygYP.jpg'},
+        {id: 2, name: 'Igor', avatar: 'https://pbs.twimg.com/media/DqsHCtWXQAYygYP.jpg'},
+        {id: 3, name: 'Vlad', avatar: 'https://pbs.twimg.com/media/DqsHCtWXQAYygYP.jpg'},
+        {id: 4, name: 'Alexey', avatar: 'https://pbs.twimg.com/media/DqsHCtWXQAYygYP.jpg'},
+        {id: 5, name: 'Stas', avatar: 'https://pbs.twimg.com/media/DqsHCtWXQAYygYP.jpg'},
     ],
     messageData: [
         {id: 1, info: 'Hi'},

@@ -1,4 +1,6 @@
 import {IPost} from "../components/Content/Posts/Post/Post";
+import {Dispatch} from "redux";
+import {userMainAPI} from "../api/api";
 
 export const ADD_POST = 'ADD-POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -83,6 +85,15 @@ export const setUserProfile = (profile: IMainUser) => {
             profile
         }
     }as const
+}
+
+export const changeUserTemplate = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        userMainAPI.changeUserTemplate(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
 }
 
 export default profileReducer

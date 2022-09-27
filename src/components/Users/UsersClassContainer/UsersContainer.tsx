@@ -5,6 +5,8 @@ import {IUser} from "../../../old/User/User";
 import React from "react";
 import {UsersRender} from "./UsersRender";
 import {Preloader} from "../../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 interface MapStateToProps {
     users: IUser[]
@@ -100,9 +102,9 @@ class UsersClass extends React.Component<UsersPropsType> {
 
 // export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)
 
-export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setFollowing,
-    getUsers: getUsersThunkCreator
-})(UsersClass)
+// export const UsersContainer = withAuthRedirect(connect(mapStateToProps, {follow, unfollow, setFollowing, getUsers: getUsersThunkCreator})(UsersClass))
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {follow, unfollow, setFollowing, getUsers: getUsersThunkCreator}),
+    withAuthRedirect
+)(UsersClass)

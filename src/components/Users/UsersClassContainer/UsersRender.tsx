@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import s from "../../../old/User/User.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {usersAPI} from "../../../api/api";
 
 export interface IUser {
@@ -41,6 +41,7 @@ export const UsersRender: FC<IUsersRender> = ({
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    // if(!isAuth) return <Redirect to='/login'/>
     return (
         <div>
             <h2>Users</h2>

@@ -3,6 +3,8 @@ import {RootState} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
 import {IDialogsAll, onAddMessage, onMessageChange} from "../../redux/dialogs_reducer";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 // interface IDialogsContainer {
@@ -43,7 +45,7 @@ export type DialogsPropsType = MapStateToProps & MapDispatchToProps
 
 let mapStateToProps = (state: RootState): MapStateToProps => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
     }
 }
 
@@ -58,7 +60,20 @@ let mapStateToProps = (state: RootState): MapStateToProps => {
 //     }
 // }
 
-export const DialogsContainer = connect(mapStateToProps, {
-    onAddMessage,
-    onMessageChange
-})(Dialogs);
+// let AuthRedirectComponent = (props: DialogsPropsType) => {
+//     if (!props.isAuth) return <Redirect to='/login'/>
+//     return <Dialogs {...props}/>
+// }
+
+// compose(withAuthRedirect)(Dialogs)
+//
+// export const DialogsContainer = withAuthRedirect(connect(mapStateToProps, {
+//     onAddMessage,
+//     onMessageChange
+// })(Dialogs));
+// export default compose(connect(mapStateToProps, {onAddMessage, onMessageChange}), withAuthRedirect(Dialogs))
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {onAddMessage, onMessageChange}),
+    withAuthRedirect
+)(Dialogs)

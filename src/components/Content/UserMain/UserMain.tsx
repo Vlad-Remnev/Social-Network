@@ -3,6 +3,7 @@ import s from "./UserMain.module.css";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {IMainUser} from "../../../redux/profile_reducer";
 import avatar from '../../../assets/852.jpg'
+import {UserMainStatus} from "./UserMainStatus";
 
 interface IUser {
     profile: IMainUser | null
@@ -23,6 +24,7 @@ export const MainUser: FC<IUser> = ({profile}) => {
                         <div>Name: {profile.fullName}</div>
                         <div>About me: {profile.aboutMe}</div>
                         <div>Looking for a Job: {profile.lookingForAJob}</div>
+                        <UserMainStatus status={'Privet, tut!!!'}/>
                     </div>
                 </div>}
 
