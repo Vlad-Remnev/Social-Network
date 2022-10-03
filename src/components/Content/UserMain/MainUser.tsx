@@ -7,9 +7,11 @@ import {UserMainStatus} from "./UserMainStatus";
 
 interface IUser {
     profile: IMainUser | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
-export const MainUser: FC<IUser> = ({profile}) => {
+export const MainUser: FC<IUser> = ({profile, status, updateStatus}) => {
 
     return (
         <>
@@ -24,7 +26,7 @@ export const MainUser: FC<IUser> = ({profile}) => {
                         <div>Name: {profile.fullName}</div>
                         <div>About me: {profile.aboutMe}</div>
                         <div>Looking for a Job: {profile.lookingForAJob}</div>
-                        <UserMainStatus status={'Privet, tut!!!'}/>
+                        <UserMainStatus status={status} updateStatus={updateStatus}/>
                     </div>
                 </div>}
 

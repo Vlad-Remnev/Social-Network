@@ -22,13 +22,29 @@ export const usersAPI = {
     },
 }
 
+export const profileAPI = {
+    changeUserTemplate(userId: string) {
+        return instance.get(`profile/` + userId)
+    },
+    getStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status})
+    }
+}
+
 export const userMainAPI = {
     auth() {
         return instance.get('auth/me')
             .then((response) => response.data)
     },
     changeUserTemplate(userId: string) {
-        return instance.get(`profile/` + userId)
+        // console.warn('Obsolete method! Please use profileAPI.changeUserTemplate')
+        return profileAPI.changeUserTemplate(userId)
+    },
+    login(email: string, password: string) {
+        return instance.post('auth/login')
     }
 }
 

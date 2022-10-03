@@ -1,8 +1,8 @@
 import {IPost} from "../components/Content/Posts/Post/Post";
 import {IDialog} from "../components/Dialogs/DialogItem/DialogItem";
 import {IMessage} from "../components/Dialogs/Message/Message";
-import profileReducer, {AddPostActionType, UpdatePostActionType} from "./profile_reducer";
-import dialogsReducer, {AddNewPostActionType, UpdateMessageActionType} from "./dialogs_reducer";
+import profileReducer, {AddPostActionType} from "./profile_reducer";
+import dialogsReducer, {AddNewPostActionType} from "./dialogs_reducer";
 import asideReducer from "./aside_reducer";
 
 // export type AllActionTypes = AddNewPostActionType |

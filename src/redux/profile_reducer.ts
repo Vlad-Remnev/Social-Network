@@ -1,10 +1,10 @@
 import {IPost} from "../components/Content/Posts/Post/Post";
 import {Dispatch} from "redux";
-import {userMainAPI} from "../api/api";
+import {profileAPI, userMainAPI} from "../api/api";
 
 export const ADD_POST = 'ADD-POST'
-export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 export const SET_USER_PROFILE = 'SET-USER-PROFILE'
+export const SET_STATUS = 'SET_STATUS'
 
 export interface IMainUser {
     aboutMe: string
@@ -31,7 +31,8 @@ export interface IMainUser {
 export interface IProfileAll {
     profile: IMainUser | null
     postsData: IPost[]
-    newPostText: string
+    // newPostText: string
+    status: string
 }
 
 let initialState = {
@@ -40,41 +41,38 @@ let initialState = {
         {id: 1, message: 'Привет, как твои дела?', likes: 34},
         {id: 2, message: 'Сегодня был на выставке, впечатлительно!)))', likes: 10}
     ],
-    newPostText: ''
+    // newPostText: '',
+    status: ''
 }
 
 const profileReducer = (state: IProfileAll = initialState, action: AllProfileTypes) => {
     switch (action.type) {
         case "ADD-POST": {
-            let post = {id: 3, message: state.newPostText, likes: 0}
-            return {...state, postsData: [post, ...state.postsData], newPostText: ''}
-        }
-        case "UPDATE-NEW-POST-TEXT": {
-            return {...state, newPostText: action.newText}
+            let post = {id: 3, message: action.payload.newPostBody, likes: 0}
+            return {...state, postsData: [post, ...state.postsData]}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}
+        }
+        case "SET_STATUS": {
+            return {...state, status: action.payload.status}
         }
         default: return state
     }
 }
 
-export type AllProfileTypes = AddPostActionType | UpdatePostActionType | setUserProfileActionType
+export type AllProfileTypes = AddPostActionType | SetUserProfileActionType | SetStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addNewPost>
-export type UpdatePostActionType = ReturnType<typeof updatePostText>
-export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetStatusActionType = ReturnType<typeof setStatus>
 
-export const addNewPost = () => {
+export const addNewPost = (newPostBody: string) => {
     return {
-        type: ADD_POST
-    }as const
-}
-
-export const updatePostText = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
+        type: ADD_POST,
+        payload: {
+            newPostBody
+        }
     }as const
 }
 
@@ -87,11 +85,40 @@ export const setUserProfile = (profile: IMainUser) => {
     }as const
 }
 
+export const setStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        payload: {
+            status
+        }
+    }as const
+}
+
 export const changeUserTemplate = (userId: string) => {
     return (dispatch: Dispatch) => {
         userMainAPI.changeUserTemplate(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data))
+            })
+    }
+}
+
+export const getStatus = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data))
+            })
+    }
+}
+
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
             })
     }
 }

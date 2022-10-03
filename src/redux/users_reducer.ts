@@ -49,7 +49,7 @@ const usersReducer = (state: IUsersAll = initialState, action: AllUserType): IUs
             return {
                 ...state, followingInProgress: action.payload.setFollow
                     ? [...state.followingInProgress, action.payload.userId]
-                    : [...state.followingInProgress.filter(id => id != action.payload.userId)]
+                    : state.followingInProgress.filter(id => id != action.payload.userId)
             }
         default:
             return state

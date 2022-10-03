@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {RootState} from "../../../redux/redux-store";
 import {Posts} from "./Posts";
-import {addNewPost, IProfileAll, updatePostText} from "../../../redux/profile_reducer";
+import {addNewPost, IProfileAll} from "../../../redux/profile_reducer";
 
 
 // export interface IPostsContainer {
@@ -34,8 +34,7 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
-    addNewPost: () => void,
-    updatePostText: (text: string) => void
+    addNewPost: (newPostBody: string) => void,
 }
 
 export type PostsPropsType = MapStateToProps & MapDispatchToProps
@@ -57,6 +56,4 @@ let mapStateToProps = (state: RootState): MapStateToProps => {
 //     }
 // }
 
-export const PostsContainer = connect(mapStateToProps, {
-    addNewPost, updatePostText
-})(Posts)
+export const PostsContainer = connect(mapStateToProps, {addNewPost})(Posts)

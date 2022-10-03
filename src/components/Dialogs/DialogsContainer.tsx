@@ -1,7 +1,7 @@
 import React from 'react';
 import {RootState} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
-import {IDialogsAll, onAddMessage, onMessageChange} from "../../redux/dialogs_reducer";
+import {IDialogsAll, onAddMessage} from "../../redux/dialogs_reducer";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -37,8 +37,7 @@ interface MapStateToProps {
 }
 
 interface MapDispatchToProps {
-    onAddMessage: () => void,
-    onMessageChange: (text: string) => void
+    onAddMessage: (newMessageBody: string) => void,
 }
 
 export type DialogsPropsType = MapStateToProps & MapDispatchToProps
@@ -74,6 +73,6 @@ let mapStateToProps = (state: RootState): MapStateToProps => {
 // export default compose(connect(mapStateToProps, {onAddMessage, onMessageChange}), withAuthRedirect(Dialogs))
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {onAddMessage, onMessageChange}),
+    connect(mapStateToProps, {onAddMessage}),
     withAuthRedirect
 )(Dialogs)

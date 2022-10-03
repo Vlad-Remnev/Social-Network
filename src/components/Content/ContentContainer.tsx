@@ -1,7 +1,7 @@
 import React from 'react';
 import {Content} from "./Content";
 import {connect} from "react-redux";
-import {changeUserTemplate, IMainUser} from "../../redux/profile_reducer";
+import {changeUserTemplate, getStatus, IMainUser, updateStatus} from "../../redux/profile_reducer";
 import {RootState} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -14,11 +14,12 @@ class ContentContainer extends React.Component<PropsType> {
             userId = '25452'
         }
         this.props.changeUserTemplate(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
         return (
-            <Content {...this.props} profile={this.props.profile}/>
+            <Content {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
         )
     }
 }
@@ -38,14 +39,18 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 interface MapStateToProps {
     profile: IMainUser | null
+    status: string
 }
 
 interface MapDispatchToProps {
     changeUserTemplate: (userId: string) => void
+    getStatus: (userId: string) => void
+    updateStatus: (status: string) => void
 }
 
 let mapStateToProps = (state: RootState): MapStateToProps => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status
 })
 
 // let WithURLDataContainer = withRouter(ContentContainer)
@@ -53,7 +58,7 @@ let mapStateToProps = (state: RootState): MapStateToProps => ({
 // export default withAuthRedirect(connect(mapStateToProps, {changeUserTemplate})(WithURLDataContainer))
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {changeUserTemplate}),
+    connect(mapStateToProps, {changeUserTemplate, getStatus, updateStatus}),
     withRouter,
     withAuthRedirect
 )(ContentContainer)

@@ -7,7 +7,7 @@ export const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 export interface IDialogsAll {
     dialogsData: IDialog[]
     messageData: IMessage[]
-    newMessageText: string
+    // newMessageText: string
 }
 
 let initialState = {
@@ -23,7 +23,7 @@ let initialState = {
         {id: 2, info: 'How is your training in programming?'},
         {id: 3, info: 'Wish you luck)'},
     ],
-    newMessageText: ''
+    // newMessageText: ''
 }
 
 const dialogsReducer = (state: IDialogsAll = initialState, action: AllDialogsTypes) => {
@@ -37,34 +37,26 @@ const dialogsReducer = (state: IDialogsAll = initialState, action: AllDialogsTyp
     // return state
     switch (action.type) {
         case "ADD-MESSAGE": {
-            let message = {id: 4, info: state.newMessageText}
+            let message = {id: (Math.random() * 1001), info: action.payload.newMessageBody}
             // state.messageData.push(message)
             // state.newMessageText = ''
-            return {...state, messageData: [message, ...state.messageData] , newMessageText: ''}
-        }
-        case "UPDATE-MESSAGE-TEXT": {
-            // state.newMessageText = action.newText
-            return {...state, newMessageText: action.newText}
+            return {...state, messageData: [message, ...state.messageData]}
         }
         default: return state
     }
 }
 
-export type AllDialogsTypes = AddNewPostActionType | UpdateMessageActionType
+export type AllDialogsTypes = AddNewPostActionType
 
 export type AddNewPostActionType = ReturnType<typeof onAddMessage>
-export type UpdateMessageActionType = ReturnType<typeof onMessageChange>
 
 
-export const onAddMessage = () => {
+export const onAddMessage = (newMessageBody: string) => {
     return {
-        type: ADD_MESSAGE
-    }as const
-}
-export const onMessageChange = (newText: string) => {
-    return {
-        type: UPDATE_MESSAGE_TEXT,
-        newText: newText
+        type: ADD_MESSAGE,
+        payload: {
+            newMessageBody
+        }
     }as const
 }
 

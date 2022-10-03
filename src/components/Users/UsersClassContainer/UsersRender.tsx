@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import s from "../../../old/User/User.module.css";
-import {NavLink, Redirect} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
+import {NavLink} from "react-router-dom";
 
 export interface IUser {
     name: string
